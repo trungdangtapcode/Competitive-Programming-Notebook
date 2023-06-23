@@ -1,1 +1,1 @@
-> # HIGH SCHOOL IS ~~FUN~~! :D**
+> # HIGH SCHOOL IS ~~FUN~~! :D
