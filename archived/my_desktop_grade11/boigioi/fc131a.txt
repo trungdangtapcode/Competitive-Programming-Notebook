@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+#define MAX 1000001
+
+int len;
+string forT, revT;
+int kmpFor[MAX], kmpRev[MAX];
+
+void build(string s, int *pi){
+    pi[1] = 0;
+    int k = 0;
+    for(int i = 2; i <= len; i++){
+        while (k && s[i] != s[k + 1]) k = pi[k];
+        k += s[i] == s[k + 1];
+        pi[i] = k;
+    }
+}
+void init(){    
+    len = forT.length();
+    revT = forT; reverse(revT.begin(), revT.end());
+    revT = ' ' + revT, forT = ' ' + forT;
+
+    build(forT, kmpFor);
+    build(revT, kmpRev);
+}
+
+int n;
+int forVal[MAX], revVal[MAX];
+ll answer = 0;
+
+ll endFor(string s){
+    int k = 0, cur = 0;
+    for (char c: s){
+        while (k && forT[k + 1] != c) k = kmpFor[k];
+        k += forT[k + 1] == c;
+        if (k == len)
+            cur++, k = kmpFor[k];
+    }
+    answer += 1ll * cur * n;
+    return k;
+}
+ll endRev(string s){
+    reverse(s.begin(), s.end());
+    int k = 0, cur = 0;
+    for (char c: s){
+        while (k && revT[k + 1] != c) k = kmpRev[k];
+        k += revT[k + 1] == c;
+        if (k == len)
+            cur++, k = kmpRev[k];
+    }
+    answer += 1ll * cur * n;
+    if (k==16) cout <<"->" << s << endl; else cout << s << endl;
+    return k;
+}
+
+
+
+main()
+{
+    ios_base::sync_with_stdio(0); cin.tie(0);
+    cin >> forT; init();
+    cin >> n;
+    for (int i = 1; i <= n; i++){
+        string s; cin >>s;
+        forVal[endFor(s)]++, revVal[endRev(s)]++;
+    }
+    for (int i = len - 1; i >= 1; i--)
+        //if (kmpRev[i]==16) cout << i << endl,
+        forVal[kmpFor[i]] += forVal[i],
+        revVal[kmpRev[i]] += revVal[i];
+    cout << "-->" << answer << endl;
+    for (int i = 1; i <= len; i++){
+		cout << "cnt1["<<i << "] = " << forVal[i] << "   cnt2[" << i << "] = " << revVal[i] << endl; 
+	}
+    for(int i = 1; i < len; i++)
+        answer += 1ll * forVal[i] * revVal[len - i];
+    cout << answer << '\n';
+}
