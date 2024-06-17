@@ -1,4 +1,12 @@
-4   
-P R R P  
-R R S S  
+5
+2 1
+KO
+2 1
+OK
+7 1
+OOOKKKK
+7 1
+KKOOKKK
+10 2
+KOOKOKKKOO
 
