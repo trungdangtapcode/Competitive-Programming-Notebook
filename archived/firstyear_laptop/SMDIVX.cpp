@@ -1,8 +1,6 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-
-
 typedef long long ll;
 struct bignum
 {
@@ -244,3 +242,27 @@ bignum getpow(bignum a, ll n){
 	}
 	return res;
 }
+ll x, n;
+void solve(){
+	cin >> n >> x;
+	bignum base = getpow(bignum(10), n-1);
+	bignum res = (base + x - 1)/x*x;
+	if (res>=base*10){
+		cout << "-1\n";
+	} else {
+		cout << res << "\n";
+	}
+	
+}
+
+int32_t main(){
+	ios::sync_with_stdio(0);
+	cin.tie(0); cout.tie(0);
+	#ifdef JESSIE
+	freopen("input.txt","r",stdin);
+	#endif
+//	int t; cin >> t;
+//	while (t--)
+	solve();
+}
+
