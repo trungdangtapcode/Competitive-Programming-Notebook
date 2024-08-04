@@ -245,7 +245,13 @@ bignum getpow(bignum a, ll n){
 ll x, n;
 void solve(){
 	cin >> n >> x;
-	bignum base = getpow(bignum(10), n-1);
+	if (n==1){
+		cout << 0 << "\n";
+		return;
+	}
+	bignum base;
+	for (int i = 1; i < n-1; i++) base.push_back(0);
+	base.push_back(1);
 	bignum res = (base + x - 1)/x*x;
 	if (res>=base*10){
 		cout << "-1\n";
