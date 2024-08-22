@@ -1,22 +1,18 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-const int maxN = 2e5+5;
-int n, a[maxN], b[maxN];
+#define int long long
+int n;
 void solve(){
 	cin >> n;
+	int s = 0, res = 0, mmax = 0;
 	for (int i = 1; i <= n; i++){
-		cin >> a[i];
-		b[i] = b[i-1] = b[i+1] = 0;
+		int a; cin >> a;
+		s += a;
+		mmax = max(mmax,a);
+		if (s==mmax*2) res++;
 	}
-	for (int i = 1; i <= n; i++){
-		if (i!=1&&b[a[i]-1]==0&&b[a[i]+1]==0){
-			cout << "NO\n";
-			return;
-		}
-		b[a[i]] = 1;
-	}
-	cout << "YES\n";
+	cout << res << "\n";
 }
 
 int32_t main(){

@@ -8,8 +8,10 @@ void solve(){
 	map<int,int> mp;
 	for (int i = 1; i <= n; i++){
 		cin >> a[i];
-		mp[a[i]]++;
+		mp[a[i]] = i;
 	}
+	for (int i =1 ; i <= n; i++) a[i] = mp[a[i]];
+//	for (int i =1 ; i <= n; i++) cout << a[i] << " "; cout << "\n";
 	vector<int> vec;
 	for (auto it: mp) vec.push_back(it.second);
 	sort(vec.begin(),vec.end());
@@ -21,11 +23,16 @@ void solve(){
 			continue;
 		}
 //		s = " " + s;
-		map<int,int> mp;
-		for (char c: s) mp[c]++;
-		vector<int> vec2;
-		for (auto it: mp) vec2.push_back(it.second);
-		cout << (vec==vec2?"YES\n":"NO\n");
+		map<int,int> mp2;
+		int p = 0;
+		for (char c: s) mp2[c] = ++p;
+//		vector<int> vec2;
+//		for (auto it: mp) vec2.push_back(it.second);
+//		sort(vec2.begin(),vec2.end());
+//		cout << (vec==vec2?"YES\n":"NO\n");
+		bool res = 1;
+		for (int i = 1; i <= n; i++) res &= mp2[s[i-1]]==a[i];
+		cout << (res?"YES\n":"NO\n");
 	}
 }
 
