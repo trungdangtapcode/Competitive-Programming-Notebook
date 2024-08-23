@@ -30,9 +30,17 @@ int calc(int ka, int kb, int ca, int cb){
 }
 
 void solve(){
-	cin >> n >> m;
-	for (int i = 1; i <= n; i++) cin >> a[i].first;
-	for (int i = 1; i <= n; i++) cin >> a[i].second;
+	int n0;
+	map<int,int> mp;
+	cin >> n0 >> m;
+	for (int i = 1; i <= n0; i++) {
+		int x; cin >> x;
+		mp[x]++;
+	}
+	n = 0;
+	for (auto it: mp){
+		a[++n] = it;
+	}
 	sort(a+1,a+n+1);
 	for (int i = 1; i <= n; i++) k[i] = a[i].first, c[i] = a[i].second;
 	int res = 0;
