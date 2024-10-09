@@ -28,9 +28,13 @@ void flip(int k, int l, int r, int u, int y){
 		isFirst[u] ^= 1;
 		if (isFirst[u]) assert(y!=-1);
 		else assert(y==-1);
-		val[k].l = y;
-		val[k].r = y;
-		val[k].isOk = 1;
+		if (isFirst[u]){
+			val[k].l = y;
+			val[k].r = y;
+			val[k].isOk = 1;
+		} else {
+			val[k] = Node();
+		}
 		return;
 	}
 	int m = (l+r)/2;
@@ -42,6 +46,8 @@ void flip(int k, int l, int r, int u, int y){
 }
 void solve(){
 	cin >> n >> m >> q;
+	for (int i = 1; i <= n; i++) s[i].clear();
+	for (int i = 1; i <= m; i++) isFirst[i] = 0;
 	for (int i = 1; i <= n; i++){
 		cin >> a[i];
 		inva[a[i]] = i;
@@ -58,7 +64,7 @@ void solve(){
 	}
 //	cout << val[1].isOk << "\n";
 //	CANT COMBINE :(, cout << (Node()+Node()).isOk << "\n";
-	cout << ans[val[1].isOk] << "\n";
+	cout << ans[val[1].isOk&&val[1].l==1] << "\n";
 	for (int i = 1; i <= q; i++){
 //		cout << i << "\n";
 		int qs, qt, tmp1 = 0, tmp2 = 0; cin >> qs >> qt;
@@ -71,10 +77,10 @@ void solve(){
 		if (tmp2) flip(1,1,m,*s[b[qs]].begin(),-1);
 		s[b[qs]].insert(qs);
 		if (qs==*s[b[qs]].begin()) flip(1,1,m,qs,b[qs]);
-		cout << ans[val[1].isOk] << "\n";
+		cout << ans[val[1].isOk&&val[1].l==1] << "\n";
 //		for (int i = 1; i <= m; i++) cout << isFirst[i] << " "; cout << "\n"; 
 	}
-	exit(0);
+//	exit(0);
 }
 
 int32_t main(){
