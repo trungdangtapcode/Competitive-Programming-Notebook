@@ -24,7 +24,7 @@ void updt(int k, int l, int r, int u, int v, int x){
 //	cout << k << " " << l << " " << r<< " " << u << " " <<v  << "\n";
 	if (u<=l&&r<=v){
 		val[k].first += x;
-		val[k].second = l==r;
+		if (l==r) val[k].second = 1;
 //		cout << k << " = " << val[k].second << "\n";
 		lazy[k] += x;
 		return;
@@ -37,6 +37,7 @@ void updt(int k, int l, int r, int u, int v, int x){
 }
 int getpos(int k, int l, int r){
 	if (l==r) return l;
+	down(k);
 	int m = (l+r)/2;
 	if (val[2*k].first>=val[2*k+1].first)
 		return getpos(2*k,l,m);
@@ -56,8 +57,9 @@ void solve(){
 		updt(1,1,n,p,p,-1e9);
 	}
 	int res = (val[1].first==0)*val[1].second+(d-1)/2;
-	for (int day = 1; day <= min(3*n,d); day++){
+	for (int day = 1; day <= min(3*n,d-1); day++){
 		int x = (day-1)%k+1;
+		updt(1,1,n,1,v[x],1);
 		while (val[1].first>0){
 			int p = getpos(1,1,n);
 			updt(1,1,n,p,p,-1e9);
