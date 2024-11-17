@@ -1,1 +1,2 @@
 > # HIGH SCHOOL IS ~~FUN~~! :D
+> # NOW I'M SUFFER MORE
