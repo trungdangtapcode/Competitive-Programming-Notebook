@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 
 using namespace std;
+// insight: the relative of 0 and 1 (operation)
+// operation at i depend on a[i] only
 const int maxN = 5e4+5;
 int n, a[maxN], b[maxN];
 int fen[maxN];

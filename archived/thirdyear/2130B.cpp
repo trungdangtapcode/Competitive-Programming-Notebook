@@ -1,3 +1,5 @@
+// I forgot the condition contain at least 0,1,2.
+// The solution should be shorter :D, it's just B
 #include<bits/stdc++.h>
 
 using namespace std;
